@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shararah's Residence — You're Welcome</title>
+  <style>
+    :root{--accent:#e86f3b;--bg:#0b0b0c}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:#111;color:#fff;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{width:100%;max-width:920px;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.6);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));position:relative}
+    .hero{display:grid;grid-template-columns:1fr 420px;min-height:460px}
+    @media (max-width:900px){.hero{grid-template-columns:1fr;min-height:680px}}
+
+    /* left content */
+    .left{padding:40px 48px;display:flex;flex-direction:column;gap:18px}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);font-weight:600;color:var(--accent);width:max-content}
+    h1{margin:0;font-size:38px;letter-spacing:0.2px}
+    p.lead{margin:0;color:rgba(255,255,255,.9);font-size:16px}
+    .when{background:rgba(255,255,255,.03);padding:14px;border-radius:12px;margin-top:6px}
+    .address{display:flex;flex-direction:column;gap:8px}
+    .maplink{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.04);text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.03)}
+
+    .cta-row{display:flex;gap:12px;margin-top:18px}
+    button.btn{cursor:pointer;padding:12px 18px;border-radius:10px;border:0;font-weight:700}
+    .btn-visit{background:linear-gradient(90deg,var(--accent),#ff9a5c);color:#090909}
+    .btn-copy{background:transparent;border:1px solid rgba(255,255,255,.06);color:#fff}
+
+    .note{margin-top:12px;color:rgba(255,255,255,.6);font-size:14px}
+
+    /* right image */
+    .right{position:relative;overflow:hidden}
+    .right img{width:100%;height:100%;object-fit:cover;display:block}
+    .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.5))}
+    .tag{position:absolute;left:16px;bottom:16px;background:rgba(0,0,0,.45);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.05)}
+
+    footer{padding:14px 18px;background:rgba(0,0,0,.03);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+    a.small{color:inherit;text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div class="card" id="inviteCard">
+    <div class="hero">
+      <div class="left">
+        <span class="badge">Shararah's Residence</span>
+        <h1>You're invited — come by anytime</h1>
+        <p class="lead">No formal RSVP — friends and family are welcome whenever you feel like dropping in. Light refreshments &amp; good company.</p>
+
+        <div class="when">
+          <strong>When</strong>
+          <div>Any day — you are welcome. Drop by at a time that suits you.</div>
+        </div>
+
+        <div class="address">
+          <strong>Address</strong>
+          <a class="maplink" id="mapLink" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank" rel="noopener">
+            Open in Google Maps ↗
+          </a>
+
+          <div class="cta-row">
+            <a class="maplink" id="directions" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank" rel="noopener">Get directions</a>
+            <button class="btn btn-copy" id="copyBtn">Copy address</button>
+            <button class="btn btn-visit" id="showBtn">I might drop by</button>
+          </div>
+
+          <div class="note">Tip: save this page to your phone home screen for easy access.</div>
+        </div>
+
+        <div style="flex:1"></div>
+
+        <div style="display:flex;gap:10px;align-items:center"><small>Hosted by <strong>Shararah</strong></small></div>
+      </div>
+
+      <div class="right">
+        <!-- Replace <img src="shisha.jpg"> with your preferred shisha image file (same folder) -->
+        <img src="shisha.jpg" id="bgImage" alt="shisha" />
+        <div class="overlay"></div>
+        <div class="tag">Shisha-friendly • Relaxed vibes</div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Share this invite: <a class="small" id="shareLink">Copy link</a></div>
+      <div><a class="small" href="#" id="printBtn">Print</a></div>
+    </footer>
+  </div>
+
+  <script>
+    // copy address
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText('https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc');
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=>copyBtn.textContent='Copy address',2000);
+      }catch(e){alert('Copy failed — please copy manually.')}
+    });
+
+    document.getElementById('showBtn').addEventListener('click', ()=>{
+      alert('Great — see you when you arrive!');
+    });
+
+    document.getElementById('shareLink').addEventListener('click', async (e)=>{
+      e.preventDefault();
+      const url = location.href;
+      if(navigator.share){
+        try{ await navigator.share({title: "Shararah's Residence", text: 'You are welcome any day — drop by!', url}); }
+        catch(e){}
+      } else {
+        navigator.clipboard.writeText(url).then(()=>alert('Link copied to clipboard'));
+      }
+    });
+
+    document.getElementById('printBtn').addEventListener('click',(e)=>{ e.preventDefault(); window.print(); });
+  </script>
+</body>
+</html>
