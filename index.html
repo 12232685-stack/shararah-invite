@@ -8,38 +8,46 @@
     :root{--accent:#e86f3b;--bg:#0b0b0c}
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{background:#111;color:#fff;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:100%;max-width:920px;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.6);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55));position:relative}
+    body{
+      background:#111 url('ps5-bg.jpg') no-repeat center center fixed;
+      background-size:cover;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:0;}
+    .card{z-index:1;width:100%;max-width:920px;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.6);background:rgba(0,0,0,.55);position:relative;backdrop-filter:blur(10px);}
     .hero{display:grid;grid-template-columns:1fr 420px;min-height:460px}
     @media (max-width:900px){.hero{grid-template-columns:1fr;min-height:680px}}
 
-    /* left content */
     .left{padding:40px 48px;display:flex;flex-direction:column;gap:18px}
     .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);font-weight:600;color:var(--accent);width:max-content}
-    h1{margin:0;font-size:38px;letter-spacing:0.2px}
-    p.lead{margin:0;color:rgba(255,255,255,.9);font-size:16px}
-    .when{background:rgba(255,255,255,.03);padding:14px;border-radius:12px;margin-top:6px}
+    h1{margin:0;font-size:40px;letter-spacing:0.2px;line-height:1.2}
+    p.lead{margin:0;color:rgba(255,255,255,.9);font-size:18px;line-height:1.5}
+    .when{background:rgba(255,255,255,.08);padding:16px;border-radius:12px;margin-top:6px;font-size:16px}
     .address{display:flex;flex-direction:column;gap:8px}
-    .maplink{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.04);text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.03)}
+    .maplink{display:inline-flex;align-items:center;gap:10px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.1);text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.1);font-size:16px}
 
-    .cta-row{display:flex;gap:12px;margin-top:18px}
-    button.btn{cursor:pointer;padding:12px 18px;border-radius:10px;border:0;font-weight:700}
+    .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+    button.btn{cursor:pointer;padding:14px 20px;border-radius:12px;border:0;font-weight:700;font-size:16px}
     .btn-visit{background:linear-gradient(90deg,var(--accent),#ff9a5c);color:#090909}
-    .btn-copy{background:transparent;border:1px solid rgba(255,255,255,.06);color:#fff}
+    .btn-copy{background:transparent;border:1px solid rgba(255,255,255,.15);color:#fff}
 
-    .note{margin-top:12px;color:rgba(255,255,255,.6);font-size:14px}
+    .note{margin-top:14px;color:rgba(255,255,255,.6);font-size:15px}
 
-    /* right image */
     .right{position:relative;overflow:hidden}
     .right img{width:100%;height:100%;object-fit:cover;display:block}
     .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.5))}
     .tag{position:absolute;left:16px;bottom:16px;background:rgba(0,0,0,.45);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.05)}
 
-    footer{padding:14px 18px;background:rgba(0,0,0,.03);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+    footer{padding:14px 18px;background:rgba(0,0,0,.3);display:flex;justify-content:space-between;align-items:center;font-size:14px}
     a.small{color:inherit;text-decoration:underline}
   </style>
 </head>
 <body>
+  <div class="overlay-bg"></div>
   <div class="card" id="inviteCard">
     <div class="hero">
       <div class="left">
@@ -54,9 +62,7 @@
 
         <div class="address">
           <strong>Address</strong>
-          <a class="maplink" id="mapLink" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank" rel="noopener">
-            Open in Google Maps ↗
-          </a>
+          <a class="maplink" id="mapLink" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank" rel="noopener">Open in Google Maps ↗</a>
 
           <div class="cta-row">
             <a class="maplink" id="directions" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank" rel="noopener">Get directions</a>
@@ -68,12 +74,10 @@
         </div>
 
         <div style="flex:1"></div>
-
-        <div style="display:flex;gap:10px;align-items:center"><small>Hosted by <strong>Shararah</strong></small></div>
+        <div style="display:flex;gap:10px;align-items:center"><small>Hosted by <strong>Nabil Shararah</strong></small></div>
       </div>
 
       <div class="right">
-        <!-- Replace <img src="shisha.jpg"> with your preferred shisha image file (same folder) -->
         <img src="shisha.jpg" id="bgImage" alt="shisha" />
         <div class="overlay"></div>
         <div class="tag">Shisha-friendly • Relaxed vibes</div>
@@ -87,7 +91,6 @@
   </div>
 
   <script>
-    // copy address
     const copyBtn = document.getElementById('copyBtn');
     copyBtn.addEventListener('click', async () => {
       try{
