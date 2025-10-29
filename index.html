@@ -9,11 +9,14 @@
       --accent: #e86f3b;
       --bg: #0b0b0c;
     }
+
     * {
       box-sizing: border-box;
-    }
-    body {
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Inter', ui-sans-serif, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       background: #111 url('ps5-bg.jpg') no-repeat center center fixed;
       background-size: cover;
@@ -21,32 +24,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
       min-height: 100vh;
+      padding: 20px;
       position: relative;
     }
 
+    /* Transparent overlay to darken the background */
     .overlay-bg {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
       z-index: 0;
     }
 
+    /* Main invite card */
     .card {
+      position: relative;
       z-index: 1;
-      width: 100%;
-      max-width: 900px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(10px);
-    }
-
-    .content {
-      padding: 40px 30px;
+      border-radius: 18px;
+      padding: 30px 24px;
+      max-width: 600px;
+      width: 100%;
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .badge {
@@ -56,27 +61,27 @@
       background: rgba(255, 255, 255, 0.1);
       color: var(--accent);
       font-weight: 600;
-      font-size: 16px;
+      font-size: 15px;
       margin-bottom: 14px;
     }
 
     h1 {
       font-size: 32px;
-      margin: 0 0 16px;
+      margin-bottom: 16px;
       line-height: 1.2;
     }
 
     p.lead {
       font-size: 18px;
       color: rgba(255, 255, 255, 0.9);
-      margin: 0 0 24px;
+      margin-bottom: 24px;
     }
 
     .when, .address {
       background: rgba(255, 255, 255, 0.08);
       border-radius: 12px;
       padding: 16px;
-      margin: 14px 0;
+      margin: 16px 0;
       text-align: left;
     }
 
@@ -88,13 +93,14 @@
 
     a.maplink {
       display: block;
-      padding: 12px;
+      text-align: center;
       margin-top: 8px;
+      padding: 12px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       color: #fff;
       text-decoration: none;
-      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     a.maplink:hover {
@@ -104,9 +110,9 @@
     .cta-row {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       margin-top: 16px;
-      justify-content: center;
     }
 
     button.btn {
@@ -116,6 +122,7 @@
       border: none;
       font-weight: 700;
       font-size: 16px;
+      transition: all 0.25s ease;
     }
 
     .btn-visit {
@@ -129,10 +136,20 @@
       color: #fff;
     }
 
+    .btn-copy:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .note {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
     footer {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 14px;
-      text-align: center;
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 12px;
       font-size: 14px;
       color: rgba(255, 255, 255, 0.8);
     }
@@ -156,31 +173,29 @@
   <div class="overlay-bg"></div>
 
   <div class="card">
-    <div class="content">
-      <span class="badge">Shararah's Residence</span>
-      <h1>You're invited — come by anytime</h1>
-      <p class="lead">No formal RSVP — friends and family are welcome whenever you feel like dropping in. Light refreshments & good company.</p>
+    <span class="badge">Shararah's Residence</span>
+    <h1>You're invited — come by anytime</h1>
+    <p class="lead">No formal RSVP — friends and family are welcome whenever you feel like dropping in. Light refreshments & good company.</p>
 
-      <div class="when">
-        <strong>When</strong>
-        Any day — you are welcome. Drop by at a time that suits you.
-      </div>
-
-      <div class="address">
-        <strong>Address</strong>
-        <a class="maplink" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank">Open in Google Maps ↗</a>
-        <div class="cta-row">
-          <button class="btn btn-copy" id="copyBtn">Copy address</button>
-          <button class="btn btn-visit" id="showBtn">I might drop by</button>
-        </div>
-      </div>
-
-      <p class="note">Tip: Save this page to your phone home screen for easy access.</p>
-      <p><small>Hosted by <strong>Nabil Shararah</strong></small></p>
+    <div class="when">
+      <strong>When</strong>
+      Any day — you are welcome. Drop by at a time that suits you.
     </div>
 
+    <div class="address">
+      <strong>Address</strong>
+      <a class="maplink" href="https://maps.app.goo.gl/Rrzu8mpwDABAuKuh6?g_st=ipc" target="_blank">Open in Google Maps ↗</a>
+
+      <div class="cta-row">
+        <button class="btn btn-copy" id="copyBtn">Copy address</button>
+        <button class="btn btn-visit" id="showBtn">I might drop by</button>
+      </div>
+    </div>
+
+    <p class="note">Tip: Save this page to your phone home screen for easy access.</p>
     <footer>
-      Share this invite: <a href="#" id="shareLink">Copy link</a>
+      Hosted by <strong>Nabil Shararah</strong><br>
+      <a href="#" id="shareLink">Share this invite</a>
     </footer>
   </div>
 
