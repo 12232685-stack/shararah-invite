@@ -188,9 +188,7 @@
 
 
   <div class="card">
-     <audio autoplay loop>
-        <source src="song.mp3" type="audio/mpeg">
-      </audio>
+     
     <span class="badge">Shararah's Residence</span>
     <h1>You're invited — come by anytime</h1>
     <p class="lead">No formal RSVP — friends and family are welcome whenever you feel like dropping in. Light refreshments & good company.</p>
@@ -219,11 +217,7 @@
   <button id="musicBtn" class="btn btn-copy">🎵 Play Music</button>
 </div>
 
-<!-- Add this near the end of the <body>: -->
-    <audio id="bgMusic" loop>
-    <source src="song.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+
 
   <script>
     const copyBtn = document.getElementById('copyBtn');
@@ -252,21 +246,11 @@
         navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard'));
       }
     });
-    const music = document.getElementById('bgMusic');
-  const btn = document.getElementById('musicBtn');
-
-  btn.addEventListener('click', () => {
-    if (music.paused) {
-      music.play();
-      btn.textContent = '⏸ Pause Music';
-    } else {
-      music.pause();
-      btn.textContent = '🎵 Play Music';
-    }
-  });
+   
   </script>
 </body>
 </html>
+
 
 
 
